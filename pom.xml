@@ -8,6 +8,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>17</maven.compiler.release>
-        <exec.mainClass>com.codeup.academico.Academico</exec.mainClass>
+        <exec.mainClass>com.codeup.academico.App</exec.mainClass>
     </properties>
 </project>
