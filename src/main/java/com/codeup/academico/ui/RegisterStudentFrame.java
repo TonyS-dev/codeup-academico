@@ -4,19 +4,16 @@
  */
 package com.codeup.academico.ui;
 
-import com.codeup.academico.domain.Grade;
-import com.codeup.academico.domain.Student;
-import com.codeup.academico.service.RegisterStudent;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import com.codeup.academico.util.ValidationUtils;
-import com.codeup.academico.service.RegisterStudent;
+import com.codeup.academico.domain.Grade;
+import com.codeup.academico.domain.Student;
 import com.codeup.academico.service.Calculate;
 import com.codeup.academico.service.RegisterStudent;
+import com.codeup.academico.util.ValidationUtils;
 /**
  *
  * @author tonys-dev
@@ -67,9 +64,10 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         studentsTable = new javax.swing.JTable();
         saveButton = new javax.swing.JButton();
-        lblAverage1 = new javax.swing.JLabel();
-        lblMaxGrade1 = new javax.swing.JLabel();
-        lblResult1 = new javax.swing.JLabel();
+        lblStudentsAverage = new javax.swing.JLabel();
+        lblStudentsMaxGrade = new javax.swing.JLabel();
+        lblStudentsResult = new javax.swing.JLabel();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
 
         jButton3.setText("Calculate!");
 
@@ -83,10 +81,10 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
                 txtNameActionPerformed(evt);
             }
         });
-        getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 180, 40));
+        getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 180, 40));
 
         jLabel1.setText("Name");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
 
         statisticsButton.setBackground(new java.awt.Color(102, 153, 255));
         statisticsButton.setForeground(new java.awt.Color(0, 0, 0));
@@ -99,7 +97,7 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
         getContentPane().add(statisticsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 600, 110, 40));
 
         jLabel2.setText("Age");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 70, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 70, -1));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 57, 1010, -1));
 
         txtGrade1.addActionListener(new java.awt.event.ActionListener() {
@@ -107,30 +105,30 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
                 txtGrade1ActionPerformed(evt);
             }
         });
-        getContentPane().add(txtGrade1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 100, 30));
+        getContentPane().add(txtGrade1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 100, 30));
 
         jLabel3.setText("Grade 1");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
 
         txtGrade2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtGrade2ActionPerformed(evt);
             }
         });
-        getContentPane().add(txtGrade2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 100, 30));
+        getContentPane().add(txtGrade2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 100, 30));
 
         jLabel4.setText("Grade 2");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, -1, -1));
 
         txtGrade3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtGrade3ActionPerformed(evt);
             }
         });
-        getContentPane().add(txtGrade3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 100, 30));
+        getContentPane().add(txtGrade3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, 100, 30));
 
         jLabel5.setText("Grade 3");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, -1, -1));
 
         clearButton.setBackground(new java.awt.Color(255, 51, 51));
         clearButton.setText("Clear");
@@ -139,7 +137,7 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
                 clearButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(clearButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 90, 40));
+        getContentPane().add(clearButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 90, 40));
 
         exitButton.setBackground(new java.awt.Color(255, 51, 51));
         exitButton.setText("Exit");
@@ -149,16 +147,16 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(exitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, 90, 40));
-        getContentPane().add(lblAverage, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 220, 50));
-        getContentPane().add(lblMaxGrade, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 220, 50));
+        getContentPane().add(lblAverage, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 220, 50));
+        getContentPane().add(lblMaxGrade, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 490, 220, 50));
 
         jLabel9.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         jLabel9.setText("Welcome!");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 60, -1, 50));
 
         lblResult.setFont(new java.awt.Font("Adwaita Mono", 1, 24)); // NOI18N
-        getContentPane().add(lblResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 550, 220, 50));
-        getContentPane().add(txtAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 100, 40));
+        getContentPane().add(lblResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 550, 220, 50));
+        getContentPane().add(txtAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, 100, 40));
         getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(571, 409, -1, -1));
 
         calculateButton.setBackground(new java.awt.Color(102, 255, 102));
@@ -169,7 +167,7 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
                 calculateButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(calculateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, 110, 40));
+        getContentPane().add(calculateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 110, 40));
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 1010, 10));
 
         studentsTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -213,12 +211,13 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
                 saveButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, 110, 40));
-        getContentPane().add(lblAverage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 430, 220, 50));
-        getContentPane().add(lblMaxGrade1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 490, 220, 50));
+        getContentPane().add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, 110, 40));
+        getContentPane().add(lblStudentsAverage, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 430, 220, 50));
+        getContentPane().add(lblStudentsMaxGrade, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 490, 220, 50));
 
-        lblResult1.setFont(new java.awt.Font("Adwaita Mono", 1, 24)); // NOI18N
-        getContentPane().add(lblResult1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 550, 220, 50));
+        lblStudentsResult.setFont(new java.awt.Font("Adwaita Mono", 1, 12)); // NOI18N
+        getContentPane().add(lblStudentsResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 550, 220, 50));
+        getContentPane().add(filler2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 640, 10, 10));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -254,11 +253,18 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
         lblAverage.setText("");
         lblMaxGrade.setText("");
         lblResult.setText("");
+        lblStudentsAverage.setText("");
+        lblStudentsMaxGrade.setText("");
+        lblStudentsResult.setText("");
     }//GEN-LAST:event_clearButtonActionPerformed
 
     private void statisticsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statisticsButtonActionPerformed
         // TODO add your handling code here:
-        
+        List<Student> students = RegisterStudent.listStudents();
+
+        lblStudentsAverage.setText("Students Average: " + RegisterStudent.calculateAverage(students));
+        lblStudentsMaxGrade.setText("Best Student(s): " + RegisterStudent.getBestStudents(students));
+        lblStudentsResult.setText("Approved: " + RegisterStudent.countApproved(students) + " Failed: " + RegisterStudent.countFailed(students));
     }//GEN-LAST:event_statisticsButtonActionPerformed
     
     private void updateStudentsList() {
@@ -348,6 +354,7 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
 
             RegisterStudent.addStudent(student);
             updateStudentsList();
+            JOptionPane.showMessageDialog(this, "Info: " + "Student saved correctly", "Success", JOptionPane.INFORMATION_MESSAGE);
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "IllegalArgument", JOptionPane.ERROR_MESSAGE);
         } catch (NullPointerException e) {
@@ -385,6 +392,7 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
     private javax.swing.JButton clearButton;
     private javax.swing.JButton exitButton;
     private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -396,11 +404,11 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblAverage;
-    private javax.swing.JLabel lblAverage1;
     private javax.swing.JLabel lblMaxGrade;
-    private javax.swing.JLabel lblMaxGrade1;
     private javax.swing.JLabel lblResult;
-    private javax.swing.JLabel lblResult1;
+    private javax.swing.JLabel lblStudentsAverage;
+    private javax.swing.JLabel lblStudentsMaxGrade;
+    private javax.swing.JLabel lblStudentsResult;
     private java.awt.PopupMenu popupMenu1;
     private javax.swing.JButton saveButton;
     private javax.swing.JButton statisticsButton;
