@@ -28,12 +28,12 @@ public class ValidationUtils {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Age must be a number.");
         }
-        if (isInRange(age, 1, 100)) {
-            throw new IllegalArgumentException("Age must be between 1 and 100.");
+        if (isInRange(age, 1, 120)) {
+            throw new IllegalArgumentException("Age must be between 1 and 120.");
         }
     }
 
-    public static void validateGrades(Object[] gradesArr) {
+    public static void validateStrGrades(Object[] gradesArr) {
         for (Object gradeObj : gradesArr) {
             String gradeStr = gradeObj.toString();
             if (isEmptyOrNull(gradeStr)) {
