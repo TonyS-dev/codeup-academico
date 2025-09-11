@@ -5,10 +5,7 @@
 package com.codeup.academico.service;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import com.codeup.academico.domain.Student;
 
@@ -27,22 +24,35 @@ public class RegisterStudent {
     public static List<Student> listStudents() {
         return students;
     }
-    public static double calculateAverage(List<Student> students, String studentId) {
-        return Calculate.Average(students.stream()
-                .filter(s -> s.getId().equals(studentId))
-                .flatMap(s -> s.getGrades().stream())
-                .collect(Collectors.toList()));
+    public static double calculateAverage(List<Student> students) {
+        double total = 0.0;
+        for (Object student : students) {
+            total += Calculate.Average(((Student) student).getGrades());
+        }
+        return Math.round((total / students.size()) * 10.0) / 10.0;
     }
-    public static Optional<Student> bestStudent() {
+    public static String getBestStudents(List<Student> students) {
+        double maxAverage = students.stream()
+                .mapToDouble(student -> calculateAverage(List.of(student)))
+                .max()
+                .orElse(Double.NaN);
+
+        if (Double.isNaN(maxAverage)) {
+            return "";
+        }
+
         return students.stream()
-                .max(Comparator.comparingDouble(s -> calculateAverage(students, s.getId())));
+                .filter(student -> calculateAverage(List.of(student)) == maxAverage)
+                .map(Student::toString)
+                .reduce((s1, s2) -> s1 + ", " + s2)
+                .orElse("");
     }
-    public static long countApproved() {
+    public static long countApproved(List<Student> students) {
         return students.stream()
                 .filter(s -> Calculate.Approved(s.getGrades()))
                 .count();
     }
-    public static long countFailed() {
+    public static long countFailed(List<Student> students) {
         return students.stream()
                 .filter(s -> !Calculate.Approved(s.getGrades()))
                 .count();
