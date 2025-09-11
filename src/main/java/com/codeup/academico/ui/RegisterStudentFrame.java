@@ -4,13 +4,19 @@
  */
 package com.codeup.academico.ui;
 
+import com.codeup.academico.domain.Grade;
 import com.codeup.academico.domain.Student;
+import com.codeup.academico.service.RegisterStudent;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import com.codeup.academico.util.ValidationUtils;
-import com.codeup.academico.util.ValidationUtils.*;
-
+import com.codeup.academico.service.RegisterStudent;
+import com.codeup.academico.service.Calculate;
+import com.codeup.academico.service.RegisterStudent;
 /**
  *
  * @author tonys-dev
@@ -39,7 +45,7 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
         popupMenu1 = new java.awt.PopupMenu();
         txtName = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        calculateButton = new javax.swing.JButton();
+        statisticsButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         txtGrade1 = new javax.swing.JTextField();
@@ -56,20 +62,104 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
         lblResult = new javax.swing.JLabel();
         txtAge = new javax.swing.JSpinner();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
+        calculateButton = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        studentsTable = new javax.swing.JTable();
+        saveButton = new javax.swing.JButton();
+        lblAverage1 = new javax.swing.JLabel();
+        lblMaxGrade1 = new javax.swing.JLabel();
+        lblResult1 = new javax.swing.JLabel();
 
         jButton3.setText("Calculate!");
 
         popupMenu1.setLabel("popupMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameActionPerformed(evt);
             }
         });
+        getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 180, 40));
 
         jLabel1.setText("Name");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+
+        statisticsButton.setBackground(new java.awt.Color(102, 153, 255));
+        statisticsButton.setForeground(new java.awt.Color(0, 0, 0));
+        statisticsButton.setText("Statistics");
+        statisticsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statisticsButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(statisticsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 600, 110, 40));
+
+        jLabel2.setText("Age");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 70, -1));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 57, 1010, -1));
+
+        txtGrade1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtGrade1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtGrade1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 100, 30));
+
+        jLabel3.setText("Grade 1");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, -1, -1));
+
+        txtGrade2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtGrade2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtGrade2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, 100, 30));
+
+        jLabel4.setText("Grade 2");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, -1, -1));
+
+        txtGrade3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtGrade3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtGrade3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 100, 30));
+
+        jLabel5.setText("Grade 3");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, -1, -1));
+
+        clearButton.setBackground(new java.awt.Color(255, 51, 51));
+        clearButton.setText("Clear");
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(clearButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 90, 40));
+
+        exitButton.setBackground(new java.awt.Color(255, 51, 51));
+        exitButton.setText("Exit");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(exitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, 90, 40));
+        getContentPane().add(lblAverage, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 220, 50));
+        getContentPane().add(lblMaxGrade, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 220, 50));
+
+        jLabel9.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
+        jLabel9.setText("Welcome!");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 60, -1, 50));
+
+        lblResult.setFont(new java.awt.Font("Adwaita Mono", 1, 24)); // NOI18N
+        getContentPane().add(lblResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 550, 220, 50));
+        getContentPane().add(txtAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 100, 40));
+        getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(571, 409, -1, -1));
 
         calculateButton.setBackground(new java.awt.Color(102, 255, 102));
         calculateButton.setForeground(new java.awt.Color(0, 0, 0));
@@ -79,156 +169,56 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
                 calculateButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(calculateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, 110, 40));
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 1010, 10));
 
-        jLabel2.setText("Age");
+        studentsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        txtGrade1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGrade1ActionPerformed(evt);
+            },
+            new String [] {
+                "Name", "Age", "Grade 1", "Grade 2", "Grade 3"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
+        jScrollPane1.setViewportView(studentsTable);
+        if (studentsTable.getColumnModel().getColumnCount() > 0) {
+            studentsTable.getColumnModel().getColumn(1).setResizable(false);
+            studentsTable.getColumnModel().getColumn(2).setResizable(false);
+            studentsTable.getColumnModel().getColumn(3).setResizable(false);
+            studentsTable.getColumnModel().getColumn(4).setResizable(false);
+        }
 
-        jLabel3.setText("Grade 1");
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 150, -1, -1));
 
-        txtGrade2.addActionListener(new java.awt.event.ActionListener() {
+        saveButton.setBackground(new java.awt.Color(102, 255, 102));
+        saveButton.setForeground(new java.awt.Color(0, 0, 0));
+        saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGrade2ActionPerformed(evt);
+                saveButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, 110, 40));
+        getContentPane().add(lblAverage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 430, 220, 50));
+        getContentPane().add(lblMaxGrade1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 490, 220, 50));
 
-        jLabel4.setText("Grade 2");
-
-        txtGrade3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtGrade3ActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setText("Grade 3");
-
-        clearButton.setBackground(new java.awt.Color(255, 51, 51));
-        clearButton.setText("Clear");
-        clearButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearButtonActionPerformed(evt);
-            }
-        });
-
-        exitButton.setBackground(new java.awt.Color(255, 51, 51));
-        exitButton.setText("Exit");
-        exitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitButtonActionPerformed(evt);
-            }
-        });
-
-        jLabel9.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
-        jLabel9.setText("Welcome!");
-
-        lblResult.setFont(new java.awt.Font("Adwaita Mono", 1, 24)); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(340, 340, 340)
-                .addComponent(jLabel9)
-                .addGap(245, 245, 245)
-                .addComponent(exitButton))
-            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel1)
-                .addGap(159, 159, 159)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(150, 150, 150)
-                        .addComponent(lblAverage, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtGrade1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtGrade2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(txtGrade3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(125, 125, 125)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMaxGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblResult, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(clearButton)
-                        .addGap(34, 34, 34)
-                        .addComponent(calculateButton))
-                    .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addComponent(exitButton))
-                .addGap(7, 7, 7)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(2, 2, 2)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAverage, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMaxGrade, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(jLabel3)))
-                        .addGap(5, 5, 5)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtGrade1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(lblResult, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(5, 5, 5)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtGrade2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtGrade3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(42, 42, 42)))
-                .addGap(60, 60, 60)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(clearButton)
-                    .addComponent(calculateButton))
-                .addGap(18, 18, 18)
-                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        lblResult1.setFont(new java.awt.Font("Adwaita Mono", 1, 24)); // NOI18N
+        getContentPane().add(lblResult1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 550, 220, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -266,32 +256,76 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
         lblResult.setText("");
     }//GEN-LAST:event_clearButtonActionPerformed
 
+    private void statisticsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statisticsButtonActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_statisticsButtonActionPerformed
+    
+    private void updateStudentsList() {
+        var model = (javax.swing.table.DefaultTableModel) studentsTable.getModel();
+        model.setRowCount(0); // Cleans the table
+        for (var student : RegisterStudent.listStudents()) {
+            model.addRow(new Object[]{
+                student.getName(),
+                student.getAge(),
+                student.getGrades().get(0).getValue(),
+                student.getGrades().get(1).getValue(),
+                student.getGrades().get(2).getValue()
+            });
+        }
+    }
+    private class getData {
+
+        private String name(){
+            String name = txtName.getText();
+            validateInput("name", name);
+            return name;
+        }
+
+        private int age(){
+            Object objAge = txtAge.getValue();
+            validateInput("age", objAge);
+            return Integer.parseInt(objAge.toString());
+        }
+
+        private Object[] strGrades(){
+            Object strGrades = new Object[]{txtGrade1.getText(), txtGrade2.getText(), txtGrade3.getText()};
+            validateInput("grades", strGrades);
+            return (Object[]) strGrades;
+        }
+
+        private void validateInput(String type, Object... params) {
+            switch (type) {
+                case "name" -> ValidationUtils.validateName((String) params[0]);
+                case "age" -> ValidationUtils.validateAge(params[0]);
+                case "grades" -> ValidationUtils.validateStrGrades((Object[]) params[0]);
+            }
+        }
+        
+        private List<Grade> grades() {
+            Object[] strGrades = strGrades();
+            List<Grade> grades = new ArrayList<>();
+            for (Object strGrade : strGrades) {
+                grades.add(new Grade(Double.parseDouble(strGrade.toString())));
+            }
+            return grades;
+        }
+
+        private Object[] getEverything() {
+            return new Object[]{name(), age(), grades()};
+        }
+
+    }
+    
     private void calculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateButtonActionPerformed
         // TODO add your handling code here:
         try {
-            String name = txtName.getText();
-            
-            Object objAge = txtAge.getValue();
-            
-            Object[] strGrades = {txtGrade1.getText(), txtGrade2.getText(), txtGrade3.getText()};
+            getData getData = new getData();
+            List<Grade> grades = getData.grades();
 
-            ValidationUtils.validateName(name);
-            ValidationUtils.validateAge(objAge);
-            ValidationUtils.validateGrades(strGrades);
-
-            int age = Integer.parseInt(objAge.toString());
-            
-            double[] grades = new double[3];
-            
-            for (int i = 0; i < strGrades.length; i++) {
-                grades[i] = Double.parseDouble(strGrades[i].toString());
-            }
-
-            Student student = new Student(name, age, grades[0], grades[1], grades[2]);
-            
-            lblAverage.setText("Average: " + student.calculateAverage());
-            lblMaxGrade.setText("Highest grade: " + student.getHighestGrade());
-            lblResult.setText(student.isApproved()? "Approved" : "Failed");
+            lblAverage.setText("Average: " + Calculate.Average(grades));
+            lblMaxGrade.setText("Highest grade: " + Calculate.HighestGrade(grades));
+            lblResult.setText(Calculate.Approved(grades)? "Approved" : "Failed");
 
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "IllegalArgument", JOptionPane.ERROR_MESSAGE);
@@ -299,6 +333,27 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Input Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_calculateButtonActionPerformed
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            getData getData = new getData();
+            Object[] data = getData.getEverything();
+            
+            String name = (String) data[0];
+            int age = (int) data[1];
+            List<Grade> grades = (List<Grade>) data[2];
+            
+            Student student = new Student(name, age, grades);
+
+            RegisterStudent.addStudent(student);
+            updateStudentsList();
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "IllegalArgument", JOptionPane.ERROR_MESSAGE);
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Input Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_saveButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -337,11 +392,19 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblAverage;
+    private javax.swing.JLabel lblAverage1;
     private javax.swing.JLabel lblMaxGrade;
+    private javax.swing.JLabel lblMaxGrade1;
     private javax.swing.JLabel lblResult;
+    private javax.swing.JLabel lblResult1;
     private java.awt.PopupMenu popupMenu1;
+    private javax.swing.JButton saveButton;
+    private javax.swing.JButton statisticsButton;
+    private javax.swing.JTable studentsTable;
     private javax.swing.JSpinner txtAge;
     private javax.swing.JTextField txtGrade1;
     private javax.swing.JTextField txtGrade2;
