@@ -4,13 +4,13 @@
 
 package com.codeup.academico;
 
+ 
 /**
  *
  * @author tonys-dev
  */
-public class Academico {
-
+public class App {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        
     }
 }
