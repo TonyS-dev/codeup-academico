@@ -21,7 +21,7 @@ public class RegisterStudent {
         Student student = new Student(e.getName(), e.getAge(), e.getGrades());
         students.add(student);
     }
-    public static List<Student> listStudents() {
+    public static List<Student> getStudents() {
         return students;
     }
     public static double calculateAverage(List<Student> students) {

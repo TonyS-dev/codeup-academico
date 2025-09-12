@@ -7,12 +7,14 @@ package com.codeup.academico.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import com.codeup.academico.domain.Grade;
 import com.codeup.academico.domain.Student;
 import com.codeup.academico.service.Calculate;
 import com.codeup.academico.service.RegisterStudent;
+import com.codeup.academico.service.File;
 import com.codeup.academico.util.ValidationUtils;
 /**
  *
@@ -68,6 +70,8 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
         lblStudentsMaxGrade = new javax.swing.JLabel();
         lblStudentsResult = new javax.swing.JLabel();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
+        importButton = new javax.swing.JButton();
+        exportButton = new javax.swing.JButton();
 
         jButton3.setText("Calculate!");
 
@@ -147,15 +151,15 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(exitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, 90, 40));
-        getContentPane().add(lblAverage, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, 220, 50));
-        getContentPane().add(lblMaxGrade, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 490, 220, 50));
+        getContentPane().add(lblAverage, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 220, 50));
+        getContentPane().add(lblMaxGrade, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 220, 50));
 
         jLabel9.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         jLabel9.setText("Welcome!");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 60, -1, 50));
 
         lblResult.setFont(new java.awt.Font("Adwaita Mono", 1, 24)); // NOI18N
-        getContentPane().add(lblResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 550, 220, 50));
+        getContentPane().add(lblResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 530, 220, 50));
         getContentPane().add(txtAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, 100, 40));
         getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(571, 409, -1, -1));
 
@@ -212,12 +216,32 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, 110, 40));
-        getContentPane().add(lblStudentsAverage, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 430, 220, 50));
-        getContentPane().add(lblStudentsMaxGrade, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 490, 220, 50));
+        getContentPane().add(lblStudentsAverage, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 410, 220, 50));
+        getContentPane().add(lblStudentsMaxGrade, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 470, 220, 50));
 
         lblStudentsResult.setFont(new java.awt.Font("Adwaita Mono", 1, 12)); // NOI18N
-        getContentPane().add(lblStudentsResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 550, 220, 50));
+        getContentPane().add(lblStudentsResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 530, 220, 50));
         getContentPane().add(filler2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 640, 10, 10));
+
+        importButton.setBackground(new java.awt.Color(102, 153, 255));
+        importButton.setForeground(new java.awt.Color(0, 0, 0));
+        importButton.setText("Import Csv");
+        importButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(importButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 590, 110, 40));
+
+        exportButton.setBackground(new java.awt.Color(102, 153, 255));
+        exportButton.setForeground(new java.awt.Color(0, 0, 0));
+        exportButton.setText("Export Csv");
+        exportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(exportButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 590, 110, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -260,7 +284,7 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
 
     private void statisticsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statisticsButtonActionPerformed
         // TODO add your handling code here:
-        List<Student> students = RegisterStudent.listStudents();
+        List<Student> students = RegisterStudent.getStudents();
 
         lblStudentsAverage.setText("Students Average: " + RegisterStudent.calculateAverage(students));
         lblStudentsMaxGrade.setText("Best Student(s): " + RegisterStudent.getBestStudents(students));
@@ -270,7 +294,7 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
     private void updateStudentsList() {
         var model = (javax.swing.table.DefaultTableModel) studentsTable.getModel();
         model.setRowCount(0); // Cleans the table
-        for (var student : RegisterStudent.listStudents()) {
+        for (var student : RegisterStudent.getStudents()) {
             model.addRow(new Object[]{
                 student.getName(),
                 student.getAge(),
@@ -362,6 +386,24 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
+    private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        int option = fileChooser.showSaveDialog(this);
+        if (option == JFileChooser.APPROVE_OPTION) {
+            try {
+                File.exportCsv(RegisterStudent.getStudents(), fileChooser.getSelectedFile());
+                JOptionPane.showMessageDialog(this, "File exported successfully!", "Export Success", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error exporting the file: " + e.getMessage(), "Export Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_exportButtonActionPerformed
+
+    private void importButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_importButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -391,8 +433,10 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
     private javax.swing.JButton calculateButton;
     private javax.swing.JButton clearButton;
     private javax.swing.JButton exitButton;
+    private javax.swing.JButton exportButton;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
+    private javax.swing.JButton importButton;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
