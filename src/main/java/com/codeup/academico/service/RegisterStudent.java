@@ -18,7 +18,7 @@ public class RegisterStudent {
     private final static List<Student> students = new ArrayList<>();
 
     public static void addStudent(Student e) {
-        Student student = new Student(e.getName(), e.getAge(), e.getGrades());
+        Student student = new Student(e.getId(), e.getName(), e.getAge(), e.getGrades());
         students.add(student);
     }
     public static List<Student> getStudents() {

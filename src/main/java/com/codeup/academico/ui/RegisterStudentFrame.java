@@ -6,9 +6,11 @@ package com.codeup.academico.ui;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.codeup.academico.domain.Grade;
 import com.codeup.academico.domain.Student;
@@ -370,11 +372,12 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
             getData getData = new getData();
             Object[] data = getData.getEverything();
             
+            UUID id = java.util.UUID.randomUUID();
             String name = (String) data[0];
             int age = (int) data[1];
             List<Grade> grades = (List<Grade>) data[2];
             
-            Student student = new Student(name, age, grades);
+            Student student = new Student(id, name, age, grades);
 
             RegisterStudent.addStudent(student);
             updateStudentsList();
@@ -389,19 +392,50 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
     private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
         // TODO add your handling code here:
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("CSV Files", "csv"));
         int option = fileChooser.showSaveDialog(this);
         if (option == JFileChooser.APPROVE_OPTION) {
             try {
-                File.exportCsv(RegisterStudent.getStudents(), fileChooser.getSelectedFile());
+                java.io.File file = fileChooser.getSelectedFile();
+                if (!file.getName().toLowerCase().endsWith(".csv")) {
+                    file = new java.io.File(file.getAbsolutePath() + ".csv");
+                }
+                File.exportCsv(RegisterStudent.getStudents(), file);
                 JOptionPane.showMessageDialog(this, "File exported successfully!", "Export Success", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Error exporting the file: " + e.getMessage(), "Export Error", JOptionPane.ERROR_MESSAGE);
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Export cancelled by user.", "Export Cancelled", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_exportButtonActionPerformed
 
     private void importButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importButtonActionPerformed
         // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Select students CSV File");
+
+        int option = fileChooser.showOpenDialog(this);
+        if (option == JFileChooser.APPROVE_OPTION) {
+            try {
+                List<Student> students = File.importCsv(fileChooser.getSelectedFile());
+                if (students == null) {
+                    JOptionPane.showMessageDialog(this, "No valid students found.", "Import Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                for (Student student : students) {
+                    RegisterStudent.addStudent(student);
+                }
+                updateStudentsList();
+                JOptionPane.showMessageDialog(this, "File imported successfully!", "Import Success", JOptionPane.INFORMATION_MESSAGE);
+            } catch (IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Import Error", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error importing the file: " + e.getMessage(), "Import Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Import cancelled by user.", "Import Cancelled", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_importButtonActionPerformed
 
     /**
