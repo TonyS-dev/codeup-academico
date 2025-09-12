@@ -5,20 +5,21 @@
 package com.codeup.academico.domain;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
  * @author tonys-dev
  */
 public class Student {
-    private final String id;
+    private final UUID id;
     private String name;
     private int age;
     private List<Grade> grades;
 
 
-    public Student(String name, int age, List<Grade> grades) {
-        this.id = java.util.UUID.randomUUID().toString();
+    public Student(UUID id, String name, int age, List<Grade> grades) {
+        this.id = id;
         this.name = name;
         this.age = age;
         this.grades = grades;
@@ -40,7 +41,7 @@ public class Student {
         this.grades = grades;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
