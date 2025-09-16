@@ -6,6 +6,7 @@ package com.codeup.academico.util;
 
 import java.util.List;
 
+import com.codeup.academico.domain.Grade;
 import com.codeup.academico.domain.Student;
 
 /**
@@ -37,9 +38,29 @@ public class ValidationUtils {
         }
     }
 
-    public static void validateStrGrades(Object[] gradesArr) {
-        for (Object gradeObj : gradesArr) {
-            String gradeStr = gradeObj.toString();
+    public static void validateGrades(List<Grade> grades) {
+        if (grades == null || grades.isEmpty()) {
+            throw new IllegalArgumentException("Grades list cannot be empty.");
+        }
+        if (grades.size() != 3) {
+            throw new IllegalArgumentException("Exactly 3 grades are required.");
+        }
+        for (Grade grade : grades) {
+            if (grade == null) {
+                throw new IllegalArgumentException("All grades must be filled out.");
+            }
+            double value = grade.getValue();
+            if (value < 0 || value > 5) {
+                throw new IllegalArgumentException("Grades must be between 0 and 5.");
+            }
+        }
+    }
+
+    public static void validateStrGrades(String[] gradeStrings) {
+        if (gradeStrings == null || gradeStrings.length != 3) {
+            throw new IllegalArgumentException("Exactly 3 grades are required.");
+        }
+        for (String gradeStr : gradeStrings) {
             if (isEmptyOrNull(gradeStr)) {
                 throw new IllegalArgumentException("All Grades must be filled out.");
             }
@@ -65,8 +86,8 @@ public class ValidationUtils {
         for (Student student : students) {
             validateName(student.getName());
             validateAge(student.getAge());
-/*             validateStrGrades(student.getGrades());
- */        }
+            validateGrades(student.getGrades());
+        }
     }
 
     public static boolean isEmptyOrNull(String str) {

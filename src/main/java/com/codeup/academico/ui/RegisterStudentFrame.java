@@ -310,31 +310,27 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
             return Integer.parseInt(objAge.toString());
         }
 
-        private Object[] strGrades(){
-            Object strGrades = new Object[]{txtGrade1.getText(), txtGrade2.getText(), txtGrade3.getText()};
+        private String[] strGrades(){
+            String[] strGrades = {txtGrade1.getText(), txtGrade2.getText(), txtGrade3.getText()};
             validateInput("grades", strGrades);
-            return (Object[]) strGrades;
+            return strGrades;
         }
 
-        private void validateInput(String type, Object... params) {
+        private void validateInput(String type, Object param) {
             switch (type) {
-                case "name" -> ValidationUtils.validateName((String) params[0]);
-                case "age" -> ValidationUtils.validateAge(params[0]);
-                case "grades" -> ValidationUtils.validateStrGrades((Object[]) params[0]);
+                case "name" -> ValidationUtils.validateName((String) param);
+                case "age" -> ValidationUtils.validateAge(param);
+                case "grades" -> ValidationUtils.validateStrGrades((String[]) param);
             }
         }
         
         private List<Grade> grades() {
-            Object[] strGrades = strGrades();
+            String[] strGrades = strGrades();
             List<Grade> grades = new ArrayList<>();
-            for (Object strGrade : strGrades) {
-                grades.add(new Grade(Double.parseDouble(strGrade.toString())));
+            for (String strGrade : strGrades) {
+                grades.add(new Grade(Double.parseDouble(strGrade)));
             }
             return grades;
-        }
-
-        private Object[] getEverything() {
-            return new Object[]{name(), age(), grades()};
         }
 
     }
@@ -362,12 +358,11 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             getData getData = new getData();
-            Object[] data = getData.getEverything();
             
             UUID id = java.util.UUID.randomUUID();
-            String name = (String) data[0];
-            int age = (int) data[1];
-            List<Grade> grades = (List<Grade>) data[2];
+            String name = getData.name();
+            int age = getData.age();
+            List<Grade> grades = getData.grades();
             
             Student student = new Student(id, name, age, grades);
 
