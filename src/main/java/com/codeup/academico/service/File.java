@@ -48,37 +48,36 @@ public class File {
 
         List<Student> students = new ArrayList<>();
 
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        String line;
-        reader.readLine(); // Skip header line
-        while ((line = reader.readLine()) != null) {
-            String[] fields = line.split(",");
-            if (fields.length != 6) {
-                throw new IllegalArgumentException("There is a problem with the file format. \nError found in this line: " + line + "\nPlease make sure each line has 6 items separated by commas.");
-            }
-            try {
-                UUID id = UUID.fromString(fields[0]);
-                String name = fields[1];
-                int age = Integer.parseInt(fields[2]);
-                List<Grade> grades = new ArrayList<>();
-                grades.add(new Grade(Double.parseDouble(fields[3])));
-                grades.add(new Grade(Double.parseDouble(fields[4])));
-                grades.add(new Grade(Double.parseDouble(fields[5])));
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            reader.readLine(); // Skip header line
+            while ((line = reader.readLine()) != null) {
+                String[] fields = line.split(",");
+                if (fields.length != 6) {
+                    throw new IllegalArgumentException("There is a problem with the file format. \nError found in this line: " + line + "\nPlease make sure each line has 6 items separated by commas.");
+                }
+                try {
+                    UUID id = UUID.fromString(fields[0]);
+                    String name = fields[1];
+                    int age = Integer.parseInt(fields[2]);
+                    List<Grade> grades = new ArrayList<>();
+                    grades.add(new Grade(Double.parseDouble(fields[3])));
+                    grades.add(new Grade(Double.parseDouble(fields[4])));
+                    grades.add(new Grade(Double.parseDouble(fields[5])));
 
-                Student student = new Student(
-                        id,
-                        name,
-                        age,
-                        grades
-                );
+                    Student student = new Student(
+                            id,
+                            name,
+                            age,
+                            grades
+                    );
 
-                students.add(student);
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("There was a problem reading this line: \"" + line + "\". \nPlease check that all values are correct and formatted properly. \nDetails: " + e.getMessage());
+                    students.add(student);
+                } catch (NumberFormatException e) {
+                    throw new IllegalArgumentException("There was a problem reading this line: \"" + line + "\". \nPlease check that all values are correct and formatted properly. \nDetails: " + e.getMessage());
+                }
             }
         }
-        reader.close();
-
         return students;
     }
 }

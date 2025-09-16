@@ -4,6 +4,11 @@
  */
 package com.codeup.academico.ui;
 
+import com.codeup.academico.service.UserService;
+import javax.swing.JOptionPane;
+import java.awt.event.ActionEvent;
+import java.util.Arrays;
+
 /**
  *
  * @author tonys-dev
@@ -11,11 +16,13 @@ package com.codeup.academico.ui;
 public class SignFrame extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SignFrame.class.getName());
+    private final UserService userService;
 
     /**
      * Creates new form NewJFrame
      */
     public SignFrame() {
+        this.userService = new UserService();
         initComponents();
     }
 
@@ -30,81 +37,45 @@ public class SignFrame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
-        jPanel3 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jPasswordField3 = new javax.swing.JPasswordField();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        loginButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtUsernameLogin = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        txtPasswordLogin = new javax.swing.JPasswordField();
+        jPanel3 = new javax.swing.JPanel();
+        registerButton = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        txtUsernameRegister = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtPasswordRegister = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButton3.setText("Register!");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 410, 100, 50));
-
-        jLabel5.setFont(new java.awt.Font("sansserif", 1, 36)); // NOI18N
-        jLabel5.setText("Register");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, -1, -1));
-
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 240, 50));
-
-        jLabel6.setText("UserName");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, -1, -1));
-
-        jLabel7.setText("Password");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, -1, -1));
-
-        jPasswordField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField3ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jPasswordField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, 240, 50));
-
-        jTabbedPane2.addTab("Register", jPanel3);
-
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("Login!");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        loginButton.setText("Login!");
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                loginButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 410, 100, 50));
+        jPanel2.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 410, 100, 50));
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 36)); // NOI18N
         jLabel1.setText("Login");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, -1, -1));
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        txtUsernameLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txtUsernameLoginActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 240, 50));
+        jPanel2.add(txtUsernameLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 240, 50));
 
         jLabel3.setText("UserName");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, -1, -1));
@@ -112,14 +83,50 @@ public class SignFrame extends javax.swing.JFrame {
         jLabel4.setText("Password");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, -1, -1));
 
-        jPasswordField2.addActionListener(new java.awt.event.ActionListener() {
+        txtPasswordLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField2ActionPerformed(evt);
+                txtPasswordLoginActionPerformed(evt);
             }
         });
-        jPanel2.add(jPasswordField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, 240, 50));
+        jPanel2.add(txtPasswordLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, 240, 50));
 
         jTabbedPane2.addTab("Login", jPanel2);
+
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        registerButton.setText("Register!");
+        registerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerButtonActionPerformed(evt);
+            }
+        });
+        jPanel3.add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 410, 100, 50));
+
+        jLabel5.setFont(new java.awt.Font("sansserif", 1, 36)); // NOI18N
+        jLabel5.setText("Register");
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, -1, -1));
+
+        txtUsernameRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsernameRegisterActionPerformed(evt);
+            }
+        });
+        jPanel3.add(txtUsernameRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, 240, 50));
+
+        jLabel6.setText("UserName");
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, -1, -1));
+
+        jLabel7.setText("Password");
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, -1, -1));
+
+        txtPasswordRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordRegisterActionPerformed(evt);
+            }
+        });
+        jPanel3.add(txtPasswordRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, 240, 50));
+
+        jTabbedPane2.addTab("Register", jPanel3);
 
         jPanel1.add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 600));
 
@@ -147,29 +154,111 @@ public class SignFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+        // Login button logic
+        String username = txtUsernameLogin.getText().trim();
+        char[] passwordChars = txtPasswordLogin.getPassword();
+        String password = new String(passwordChars);
+        
+        // Clear password field for security
+        txtPasswordLogin.setText("");
+        Arrays.fill(passwordChars, '\0');
+        
+        // Validate input
+        if (username.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Username and password are required.", 
+                                        "Login Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        try {
+            // Authenticate user
+            if (userService.authenticate(username, password)) {
+                JOptionPane.showMessageDialog(this, "Login successful!", 
+                                            "Success", JOptionPane.INFORMATION_MESSAGE);
+                
+                // Open main application window
+                RegisterStudentFrame mainFrame = new RegisterStudentFrame();
+                mainFrame.setLocationRelativeTo(null);
+                mainFrame.setVisible(true);
+                
+                // Close login window
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid username or password.", 
+                                            "Login Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "An error occurred during login: " + e.getMessage(), 
+                                        "Error", JOptionPane.ERROR_MESSAGE);
+            logger.severe("Login error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_loginButtonActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtUsernameLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameLoginActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtUsernameLoginActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
+        // Register button logic
+        String username = txtUsernameRegister.getText().trim();
+        char[] passwordChars = txtPasswordRegister.getPassword();
+        String password = new String(passwordChars);
+        
+        // Clear password field for security
+        txtPasswordRegister.setText("");
+        Arrays.fill(passwordChars, '\0');
+        
+        // Validate input
+        if (username.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Username and password are required.", 
+                                        "Registration Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (password.length() < 4) {
+            JOptionPane.showMessageDialog(this, "Password must be at least 4 characters long.", 
+                                        "Registration Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        try {
+            // Check if user already exists
+            if (userService.userExists(username)) {
+                JOptionPane.showMessageDialog(this, "Username already exists. Please choose a different username.", 
+                                            "Registration Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            // Register new user
+            if (userService.registerUser(username, password)) {
+                JOptionPane.showMessageDialog(this, "User registered successfully! You can now login.", 
+                                            "Success", JOptionPane.INFORMATION_MESSAGE);
+                
+                // Clear registration fields
+                txtUsernameRegister.setText("");
+                
+                // Switch to login tab
+                jTabbedPane2.setSelectedIndex(0);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Registration failed: " + e.getMessage(), 
+                                        "Error", JOptionPane.ERROR_MESSAGE);
+            logger.severe("Registration error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_registerButtonActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void txtUsernameRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameRegisterActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_txtUsernameRegisterActionPerformed
 
-    private void jPasswordField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField2ActionPerformed
+    private void txtPasswordLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordLoginActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField2ActionPerformed
+    }//GEN-LAST:event_txtPasswordLoginActionPerformed
 
-    private void jPasswordField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField3ActionPerformed
+    private void txtPasswordRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordRegisterActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField3ActionPerformed
+    }//GEN-LAST:event_txtPasswordRegisterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,8 +286,6 @@ public class SignFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -208,10 +295,12 @@ public class SignFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField3;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JButton loginButton;
+    private javax.swing.JButton registerButton;
+    private javax.swing.JPasswordField txtPasswordLogin;
+    private javax.swing.JPasswordField txtPasswordRegister;
+    private javax.swing.JTextField txtUsernameLogin;
+    private javax.swing.JTextField txtUsernameRegister;
     // End of variables declaration//GEN-END:variables
 }

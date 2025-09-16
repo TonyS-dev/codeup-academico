@@ -15,8 +15,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import com.codeup.academico.domain.Grade;
 import com.codeup.academico.domain.Student;
 import com.codeup.academico.service.Calculate;
-import com.codeup.academico.service.RegisterStudent;
 import com.codeup.academico.service.File;
+import com.codeup.academico.service.RegisterStudent;
 import com.codeup.academico.util.ValidationUtils;
 /**
  *
