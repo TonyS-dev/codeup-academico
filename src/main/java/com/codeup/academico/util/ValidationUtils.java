@@ -4,6 +4,10 @@
  */
 package com.codeup.academico.util;
 
+import java.util.List;
+
+import com.codeup.academico.domain.Student;
+
 /**
  *
  * @author tonys-dev
@@ -52,6 +56,17 @@ public class ValidationUtils {
                 throw new IllegalArgumentException("Grades must be between 0 and 5.");
             }
         }
+    }
+
+    public static void validateStudents(List<Student> students) {
+        if (students == null || students.isEmpty()) {
+            throw new IllegalArgumentException("Student list must not be empty.");
+        }
+        for (Student student : students) {
+            validateName(student.getName());
+            validateAge(student.getAge());
+/*             validateStrGrades(student.getGrades());
+ */        }
     }
 
     public static boolean isEmptyOrNull(String str) {

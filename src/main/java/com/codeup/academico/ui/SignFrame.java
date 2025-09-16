@@ -5,9 +5,12 @@
 package com.codeup.academico.ui;
 
 import com.codeup.academico.service.UserService;
+
 import javax.swing.JOptionPane;
+
 import java.awt.event.ActionEvent;
 import java.util.Arrays;
+import java.util.logging.Level;
 
 /**
  *
@@ -44,6 +47,7 @@ public class SignFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtPasswordLogin = new javax.swing.JPasswordField();
+        exitButtonLogin = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         registerButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -51,6 +55,7 @@ public class SignFrame extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtPasswordRegister = new javax.swing.JPasswordField();
+        exitButtonRegister = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,6 +95,15 @@ public class SignFrame extends javax.swing.JFrame {
         });
         jPanel2.add(txtPasswordLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, 240, 50));
 
+        exitButtonLogin.setBackground(new java.awt.Color(255, 51, 51));
+        exitButtonLogin.setText("Exit");
+        exitButtonLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonLoginActionPerformed(evt);
+            }
+        });
+        jPanel2.add(exitButtonLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 80, 40));
+
         jTabbedPane2.addTab("Login", jPanel2);
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -125,6 +139,15 @@ public class SignFrame extends javax.swing.JFrame {
             }
         });
         jPanel3.add(txtPasswordRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 320, 240, 50));
+
+        exitButtonRegister.setBackground(new java.awt.Color(255, 51, 51));
+        exitButtonRegister.setText("Exit");
+        exitButtonRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonRegisterActionPerformed(evt);
+            }
+        });
+        jPanel3.add(exitButtonRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 80, 40));
 
         jTabbedPane2.addTab("Register", jPanel3);
 
@@ -166,17 +189,20 @@ public class SignFrame extends javax.swing.JFrame {
         
         // Validate input
         if (username.isEmpty() || password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Username and password are required.", 
-                                        "Login Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Username and password are required.", "Login Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
+        Signin(username, password);
+
+    }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void Signin(String username, String password) {
         try {
             // Authenticate user
             if (userService.authenticate(username, password)) {
-                JOptionPane.showMessageDialog(this, "Login successful!", 
-                                            "Success", JOptionPane.INFORMATION_MESSAGE);
-                
+                JOptionPane.showMessageDialog(this, "Login successful!, Welcome " + username, "Success", JOptionPane.INFORMATION_MESSAGE);
+
                 // Open main application window
                 RegisterStudentFrame mainFrame = new RegisterStudentFrame();
                 mainFrame.setLocationRelativeTo(null);
@@ -185,15 +211,14 @@ public class SignFrame extends javax.swing.JFrame {
                 // Close login window
                 this.dispose();
             } else {
-                JOptionPane.showMessageDialog(this, "Invalid username or password.", 
-                                            "Login Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Invalid username or password.", "Login Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "An error occurred during login: " + e.getMessage(), 
                                         "Error", JOptionPane.ERROR_MESSAGE);
-            logger.severe("Login error: " + e.getMessage());
+            logger.log(Level.SEVERE, "Login error: {0}", e.getMessage());
         }
-    }//GEN-LAST:event_loginButtonActionPerformed
+    }
 
     private void txtUsernameLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameLoginActionPerformed
         // TODO add your handling code here:
@@ -211,40 +236,36 @@ public class SignFrame extends javax.swing.JFrame {
         
         // Validate input
         if (username.isEmpty() || password.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Username and password are required.", 
-                                        "Registration Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Username and password are required.", "Registration Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         if (password.length() < 4) {
-            JOptionPane.showMessageDialog(this, "Password must be at least 4 characters long.", 
-                                        "Registration Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Password must be at least 4 characters long.", "Registration Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         try {
             // Check if user already exists
             if (userService.userExists(username)) {
-                JOptionPane.showMessageDialog(this, "Username already exists. Please choose a different username.", 
-                                            "Registration Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Username already exists. Please choose a different username.", "Registration Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             
             // Register new user
             if (userService.registerUser(username, password)) {
-                JOptionPane.showMessageDialog(this, "User registered successfully! You can now login.", 
-                                            "Success", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "User registered successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 
                 // Clear registration fields
                 txtUsernameRegister.setText("");
+                txtPasswordRegister.setText("");
                 
-                // Switch to login tab
-                jTabbedPane2.setSelectedIndex(0);
+                // Sign In
+                Signin(username, password);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Registration failed: " + e.getMessage(), 
-                                        "Error", JOptionPane.ERROR_MESSAGE);
-            logger.severe("Registration error: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Registration failed: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            logger.log(Level.SEVERE, "Registration error: {0}", e.getMessage());
         }
     }//GEN-LAST:event_registerButtonActionPerformed
 
@@ -259,6 +280,16 @@ public class SignFrame extends javax.swing.JFrame {
     private void txtPasswordRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordRegisterActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordRegisterActionPerformed
+
+    private void exitButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonLoginActionPerformed
+        // TODO add your handling code here:
+        dispose(); // or System.exit(0);
+    }//GEN-LAST:event_exitButtonLoginActionPerformed
+
+    private void exitButtonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonRegisterActionPerformed
+        // TODO add your handling code here:
+        dispose(); // or System.exit(0);
+    }//GEN-LAST:event_exitButtonRegisterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -286,6 +317,8 @@ public class SignFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton exitButtonLogin;
+    private javax.swing.JButton exitButtonRegister;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

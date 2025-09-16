@@ -57,10 +57,7 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         clearButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
-        lblAverage = new javax.swing.JLabel();
-        lblMaxGrade = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        lblResult = new javax.swing.JLabel();
         txtAge = new javax.swing.JSpinner();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         calculateButton = new javax.swing.JButton();
@@ -68,12 +65,10 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         studentsTable = new javax.swing.JTable();
         saveButton = new javax.swing.JButton();
-        lblStudentsAverage = new javax.swing.JLabel();
-        lblStudentsMaxGrade = new javax.swing.JLabel();
-        lblStudentsResult = new javax.swing.JLabel();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         importButton = new javax.swing.JButton();
         exportButton = new javax.swing.JButton();
+        logOutButton = new javax.swing.JButton();
 
         jButton3.setText("Calculate!");
 
@@ -87,10 +82,10 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
                 txtNameActionPerformed(evt);
             }
         });
-        getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 180, 40));
+        getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 180, 40));
 
         jLabel1.setText("Name");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, -1, -1));
 
         statisticsButton.setBackground(new java.awt.Color(102, 153, 255));
         statisticsButton.setForeground(new java.awt.Color(0, 0, 0));
@@ -103,7 +98,7 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
         getContentPane().add(statisticsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 600, 110, 40));
 
         jLabel2.setText("Age");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 70, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, 70, -1));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 57, 1010, -1));
 
         txtGrade1.addActionListener(new java.awt.event.ActionListener() {
@@ -111,30 +106,30 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
                 txtGrade1ActionPerformed(evt);
             }
         });
-        getContentPane().add(txtGrade1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 100, 30));
+        getContentPane().add(txtGrade1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, 100, 30));
 
         jLabel3.setText("Grade 1");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 310, -1, -1));
 
         txtGrade2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtGrade2ActionPerformed(evt);
             }
         });
-        getContentPane().add(txtGrade2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 100, 30));
+        getContentPane().add(txtGrade2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, 100, 30));
 
         jLabel4.setText("Grade 2");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, -1, -1));
 
         txtGrade3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtGrade3ActionPerformed(evt);
             }
         });
-        getContentPane().add(txtGrade3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, 100, 30));
+        getContentPane().add(txtGrade3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, 100, 30));
 
         jLabel5.setText("Grade 3");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 260, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 310, -1, -1));
 
         clearButton.setBackground(new java.awt.Color(255, 51, 51));
         clearButton.setText("Clear");
@@ -143,7 +138,7 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
                 clearButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(clearButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 90, 40));
+        getContentPane().add(clearButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, 90, 40));
 
         exitButton.setBackground(new java.awt.Color(255, 51, 51));
         exitButton.setText("Exit");
@@ -153,16 +148,11 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(exitButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 10, 90, 40));
-        getContentPane().add(lblAverage, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 220, 50));
-        getContentPane().add(lblMaxGrade, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 220, 50));
 
         jLabel9.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         jLabel9.setText("Welcome!");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 60, -1, 50));
-
-        lblResult.setFont(new java.awt.Font("Adwaita Mono", 1, 24)); // NOI18N
-        getContentPane().add(lblResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 530, 220, 50));
-        getContentPane().add(txtAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, 100, 40));
+        getContentPane().add(txtAge, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, 100, 40));
         getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(571, 409, -1, -1));
 
         calculateButton.setBackground(new java.awt.Color(102, 255, 102));
@@ -173,7 +163,7 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
                 calculateButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(calculateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 110, 40));
+        getContentPane().add(calculateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, 110, 40));
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 1010, 10));
 
         studentsTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -217,12 +207,7 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
                 saveButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 350, 110, 40));
-        getContentPane().add(lblStudentsAverage, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 410, 220, 50));
-        getContentPane().add(lblStudentsMaxGrade, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 470, 220, 50));
-
-        lblStudentsResult.setFont(new java.awt.Font("Adwaita Mono", 1, 12)); // NOI18N
-        getContentPane().add(lblStudentsResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 530, 220, 50));
+        getContentPane().add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 400, 110, 40));
         getContentPane().add(filler2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 640, 10, 10));
 
         importButton.setBackground(new java.awt.Color(102, 153, 255));
@@ -233,7 +218,7 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
                 importButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(importButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 590, 110, 40));
+        getContentPane().add(importButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 540, 110, 40));
 
         exportButton.setBackground(new java.awt.Color(102, 153, 255));
         exportButton.setForeground(new java.awt.Color(0, 0, 0));
@@ -243,7 +228,16 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
                 exportButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(exportButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 590, 110, 40));
+        getContentPane().add(exportButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 540, 110, 40));
+
+        logOutButton.setBackground(new java.awt.Color(255, 51, 51));
+        logOutButton.setText("Log Out");
+        logOutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logOutButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(logOutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -276,21 +270,17 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
         txtGrade1.setText("");
         txtGrade2.setText("");
         txtGrade3.setText("");
-        lblAverage.setText("");
-        lblMaxGrade.setText("");
-        lblResult.setText("");
-        lblStudentsAverage.setText("");
-        lblStudentsMaxGrade.setText("");
-        lblStudentsResult.setText("");
     }//GEN-LAST:event_clearButtonActionPerformed
 
     private void statisticsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statisticsButtonActionPerformed
         // TODO add your handling code here:
         List<Student> students = RegisterStudent.getStudents();
 
-        lblStudentsAverage.setText("Students Average: " + RegisterStudent.calculateAverage(students));
-        lblStudentsMaxGrade.setText("Best Student(s): " + RegisterStudent.getBestStudents(students));
-        lblStudentsResult.setText("Approved: " + RegisterStudent.countApproved(students) + " Failed: " + RegisterStudent.countFailed(students));
+        String message = "Students Average: " + RegisterStudent.calculateAverage(students) +
+            "\nBest Student(s): " + RegisterStudent.getBestStudents(students) +
+            "\nApproved: " + RegisterStudent.countApproved(students) +
+            " Failed: " + RegisterStudent.countFailed(students);
+        JOptionPane.showMessageDialog(this, message, "Statistics", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_statisticsButtonActionPerformed
     
     private void updateStudentsList() {
@@ -355,10 +345,12 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
             getData getData = new getData();
             List<Grade> grades = getData.grades();
 
-            lblAverage.setText("Average: " + Calculate.Average(grades));
-            lblMaxGrade.setText("Highest grade: " + Calculate.HighestGrade(grades));
-            lblResult.setText(Calculate.Approved(grades)? "Approved" : "Failed");
+            String message = "Average: " + Calculate.Average(grades) +
+                "\nHighest grade: " + Calculate.HighestGrade(grades) +
+                "\n" + (Calculate.Approved(grades) ? "Approved" : "Failed");
 
+            JOptionPane.showMessageDialog(this, message, "Calculation Result", JOptionPane.INFORMATION_MESSAGE);
+                
         } catch (IllegalArgumentException e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "IllegalArgument", JOptionPane.ERROR_MESSAGE);
         } catch (NullPointerException e) {
@@ -438,6 +430,20 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_importButtonActionPerformed
 
+    public void SignOut() {
+        SignFrame mainFrame = new SignFrame();
+        mainFrame.setLocationRelativeTo(null);
+        mainFrame.setVisible(true);
+
+        this.dispose();
+        JOptionPane.showMessageDialog(this, "You have been logged out.", "Logout", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutButtonActionPerformed
+        // TODO add your handling code here:
+        SignOut();
+    }//GEN-LAST:event_logOutButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -481,12 +487,7 @@ public class RegisterStudentFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JLabel lblAverage;
-    private javax.swing.JLabel lblMaxGrade;
-    private javax.swing.JLabel lblResult;
-    private javax.swing.JLabel lblStudentsAverage;
-    private javax.swing.JLabel lblStudentsMaxGrade;
-    private javax.swing.JLabel lblStudentsResult;
+    private javax.swing.JButton logOutButton;
     private java.awt.PopupMenu popupMenu1;
     private javax.swing.JButton saveButton;
     private javax.swing.JButton statisticsButton;
