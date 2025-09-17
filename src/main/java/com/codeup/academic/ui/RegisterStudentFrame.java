@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.codeup.academico.ui;
+package com.codeup.academic.ui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +12,12 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.codeup.academico.domain.Grade;
-import com.codeup.academico.domain.Student;
-import com.codeup.academico.service.Calculate;
-import com.codeup.academico.service.File;
-import com.codeup.academico.service.RegisterStudent;
-import com.codeup.academico.util.ValidationUtils;
+import com.codeup.academic.domain.Grade;
+import com.codeup.academic.domain.Student;
+import com.codeup.academic.service.Calculate;
+import com.codeup.academic.service.File;
+import com.codeup.academic.service.RegisterStudent;
+import com.codeup.academic.util.ValidationUtils;
 /**
  *
  * @author tonys-dev

@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.codeup.academico.ui;
+package com.codeup.academic.ui;
 
-import com.codeup.academico.service.UserService;
+import com.codeup.academic.service.UserService;
 
 import javax.swing.JOptionPane;
 

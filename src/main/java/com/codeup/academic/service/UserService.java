@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.codeup.academico.service;
+package com.codeup.academic.service;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.codeup.academico.domain.User;
-import com.codeup.academico.util.PasswordUtils;
+import com.codeup.academic.domain.User;
+import com.codeup.academic.util.PasswordUtils;
 
 /**
  *

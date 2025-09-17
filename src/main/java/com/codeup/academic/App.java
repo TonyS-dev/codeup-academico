@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
-package com.codeup.academico;
+package com.codeup.academic;
 
-import com.codeup.academico.ui.SignFrame;
+import com.codeup.academic.ui.SignFrame;
 
 /**
  *
