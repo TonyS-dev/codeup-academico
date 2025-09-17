@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.codeup.academico.service;
+package com.codeup.academic.service;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,17 +15,17 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.codeup.academico.domain.AccessLevel;
-import com.codeup.academico.domain.User;
-import com.codeup.academico.domain.UserRole;
-import com.codeup.academico.util.PasswordUtils;
+import com.codeup.academic.domain.AccessLevel;
+import com.codeup.academic.domain.User;
+import com.codeup.academic.domain.UserRole;
+import com.codeup.academic.util.PasswordUtils;
 
 /**
  *
  * @author tonys-dev
  */
 public class DataBase {
-    private static final String DB_URL = "jdbc:sqlite:academico.db";
+    private static final String DB_URL = "jdbc:sqlite:academic.db";
     private static final Logger logger = Logger.getLogger(DataBase.class.getName());
     
     public DataBase() {
